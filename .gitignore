@@ -1,2 +1,5 @@
 #ビルドファイルを無視
 build/
+
+#ignore ctest files
+Testing/
