@@ -1,4 +1,0 @@
-/home/motoki/ULT-study/Library-study/Hello-Lib/build/CMakeFiles/hello.dir
-/home/motoki/ULT-study/Library-study/Hello-Lib/build/CMakeFiles/main.dir
-/home/motoki/ULT-study/Library-study/Hello-Lib/build/CMakeFiles/edit_cache.dir
-/home/motoki/ULT-study/Library-study/Hello-Lib/build/CMakeFiles/rebuild_cache.dir
