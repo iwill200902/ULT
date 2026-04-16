@@ -1,7 +1,7 @@
 #pragma once
 #include <cstdint>
 
-struct saved_register
+struct SavedRegister
 {
     uint64_t rbx;
     uint64_t rbp;
@@ -12,4 +12,4 @@ struct saved_register
     uint64_t rsp;
 };
 
-extern "C" void context_switch(saved_register& thisThread, saved_register& nextThread);
+extern "C" void context_switch(SavedRegister& nowThread, SavedRegister& nextThread);
