@@ -1,8 +1,9 @@
 #pragma once
 #include "contextswitch.hpp"
 
-#include <stack>
 #include <cstdint>
+
+#define STACK_SIZE 4096
 
 enum ThreadState {
     RUNNING,
@@ -15,5 +16,15 @@ struct TCB{
     int id;
     SavedRegister registers;
     ThreadState state;
-    std::stack<uint8_t> stack;
+    uint8_t*stack;
+
+    void init_stack(void (*fanc)()){
+        stack = new uint8_t[STACK_SIZE];
+        uint64_t * sp = (uint64_t*)(stack + STACK_SIZE);
+
+        sp--;
+        *sp = (uint64_t)fanc;
+
+        registers.rsp = (uint64_t)sp;
+    }
 };
