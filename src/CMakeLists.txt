@@ -1,6 +1,6 @@
 #静的ライブラリを作成
-add_libraly(ult_lib STATIC
-    contextswitch.s
+add_library(ult_lib STATIC 
+    contextswitch.s 
     ult.cpp
 )
 
