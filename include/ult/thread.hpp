@@ -3,9 +3,10 @@
 
 #include <cstdint>
 
-#define STACK_SIZE 4096
+constexpr uint64_t STACK_SIZE = 4096;
 
 enum ThreadState {
+    UNUSED,
     RUNNING,
     READY,
     BLOCK
@@ -13,8 +14,8 @@ enum ThreadState {
 
 
 struct TCB{
-    int id;
-    SavedRegister registers;
+    int tid;
+    SavedRegister registers = {0};
     ThreadState state;
     uint8_t*stack;
 
@@ -26,5 +27,9 @@ struct TCB{
         *sp = (uint64_t)fanc;
 
         registers.rsp = (uint64_t)sp;
+    }
+
+    void init_state(){
+        state = READY;
     }
 };
