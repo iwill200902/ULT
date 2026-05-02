@@ -1,7 +1,14 @@
 #include "ult.hpp"
 
+#include <array>
+#include <queue>
+
+constexpr std::size_t MAX_THREAD = 4096;
+
 std::array<TCB, MAX_THREAD> tcb_table;
 std::queue<TCB*> ready_queue;
+TCB* current_tcb = nullptr;
+
 
 int64_t make_thread(void (*fanc)(), TCB*& new_TCB);
 
@@ -41,4 +48,14 @@ int64_t make_thread(void (*fanc)(), TCB*&new_TCB){
     new_TCB->tid = new_TCB - tcb_table.data();
 
     return new_TCB->tid;
+}
+
+void register_main(){
+    current_tcb = tcb_table.data();
+
+    current_tcb->tid = 0;
+    current_tcb->state = RUNNING;
+    current_tcb->stack = nullptr;
+
+    return;
 }
