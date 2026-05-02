@@ -12,4 +12,4 @@ struct SavedRegister
     uint64_t rsp;
 };
 
-extern "C" void context_switch(SavedRegister& nowThread, SavedRegister& nextThread);
+extern "C" void context_switch(SavedRegister& currentThread, SavedRegister& nextThread);
