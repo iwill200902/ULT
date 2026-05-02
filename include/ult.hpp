@@ -8,3 +8,4 @@ extern std::array<TCB, MAX_THREAD> tcb_table;
 extern std::queue<TCB*> tcb_queue;
 
 extern int64_t uthread(void (*fanc)());
+extern int64_t register_main();
