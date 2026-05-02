@@ -1,7 +1,5 @@
-#ifndef CONTEXTSWITCH_HPP
-#define CONTEXTSWITCH_HPP
-#include "contextswitch/contextswitch.hpp"
-#endif
+#include "ult/contextswitch.hpp"
+
 
 #include <iostream>
 #include <queue>
@@ -11,7 +9,7 @@
 
 
 int main(){
-    saved_register thread0{}, thread1{};
+    SavedRegister thread0{}, thread1{};
 
     context_switch(thread0, thread1);
     context_switch(thread1, thread0);

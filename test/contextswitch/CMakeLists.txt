@@ -1,0 +1,5 @@
+add_executable(simple_contextswitch simple_contextswitch.cpp)
+
+target_link_libraries(simple_contextswitch PRIVATE ult_lib)
+
+add_test(NAME SimpleContextSwitch COMMAND simple_contextswitch)
