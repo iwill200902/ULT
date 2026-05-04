@@ -15,7 +15,7 @@ enum ThreadState {
 
 struct TCB{
     int tid;
-    SavedRegister registers = {};
+    SavedRegister registers;
     ThreadState state;
     uint8_t*stack;
 
@@ -27,6 +27,10 @@ struct TCB{
         *sp = (uint64_t)fanc;
 
         registers.rsp = (uint64_t)sp;
+    }
+
+    void init_registers(){
+        registers = {};
     }
 
     void init_state(){
