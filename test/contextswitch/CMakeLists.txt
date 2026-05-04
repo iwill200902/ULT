@@ -1,4 +1,5 @@
 add_executable(simple_contextswitch simple_contextswitch.cpp)
+target_compile_options(simple_contextswitch PRIVATE -Wall -Wextra)
 
 target_link_libraries(simple_contextswitch PRIVATE ult_lib)
 
