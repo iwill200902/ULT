@@ -59,3 +59,27 @@ void register_main(){
 
     return;
 }
+
+int64_t yield(){
+    if(ready_queue.empty()){
+        return -1;
+    }
+    
+    //次のtcbをpopする
+    TCB* next_tcb = ready_queue.front();    
+    ready_queue.pop();
+
+    //stateの更新
+    current_tcb->state = READY;
+    next_tcb->state = RUNNING;
+
+    //current_tcbの更新
+    ready_queue.push(current_tcb);
+    TCB* back_tcb = current_tcb;
+    current_tcb = next_tcb;
+
+    //context_switch
+    context_switch(back_tcb->registers, next_tcb->registers);
+    
+    return 0;
+}
