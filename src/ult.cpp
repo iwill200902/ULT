@@ -49,8 +49,8 @@ int64_t make_thread(void (*fanc)(), TCB*&new_TCB){ //新しいthreadを作る処
         delete[] new_TCB->stack;
     }
     //作ったthreadの初期化
-    new_TCB->init_stack(fanc);
     new_TCB->init_registers();
+    new_TCB->init_stack(fanc);
     new_TCB->init_state();
     new_TCB->tid = new_TCB - tcb_table.data();
 
