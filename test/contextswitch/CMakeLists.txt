@@ -1,6 +1,9 @@
 add_executable(simple_contextswitch simple_contextswitch.cpp)
 target_compile_options(simple_contextswitch PRIVATE -Wall -Wextra)
-
 target_link_libraries(simple_contextswitch PRIVATE ult_lib)
-
 add_test(NAME SimpleContextSwitch COMMAND simple_contextswitch)
+
+add_executable(stressTestforAI stressTestforAI.cpp)
+target_compile_options(stressTestforAI PRIVATE -Wall -Wextra)
+target_link_libraries(stressTestforAI PRIVATE ult_lib)
+add_test(NAME StressTestforAI COMMAND stressTestforAI)
