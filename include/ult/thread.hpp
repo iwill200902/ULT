@@ -21,8 +21,10 @@ struct TCB{
 
     void init_stack(void (*fanc)()){
         stack = new uint8_t[STACK_SIZE];
-        uint64_t * sp = (uint64_t*)(stack + STACK_SIZE);
+        uintptr_t sp_addr = ((uintptr_t)stack + STACK_SIZE) & ~0xF; // 16バイトアラインメント
+        uint64_t * sp = (uint64_t*)sp_addr;
 
+        sp--; // 16n * 8 にするため。
         sp--;
         *sp = (uint64_t)fanc;
 
