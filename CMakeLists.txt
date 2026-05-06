@@ -12,5 +12,5 @@ add_subdirectory(src)
 
 #ctest有効
 enable_testing()
-add_subdirectory(test)
+add_subdirectory(tests)
 add_subdirectory(examples)
