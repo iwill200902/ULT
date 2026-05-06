@@ -3,7 +3,7 @@
 
 #include <cstdint>
 
-constexpr uint64_t STACK_SIZE = 4096;
+constexpr uint64_t STACK_SIZE = 4 * 1024;
 
 enum ThreadState {
     UNUSED,
