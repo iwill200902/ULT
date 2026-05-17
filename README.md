@@ -26,7 +26,7 @@ C++で制作した、x86_64上で動作するユーザレベルスレッド(ULT)
     * 今現在のスレッドを安全に破棄し、メモリを解放するための関数です。
     * スレッドとして動かした関数の最後で**絶対に**呼ぶ必要があります。
 
-### サンプルプログラム
+### サンプルプログラム (sample program)
 [`simple_task.cpp`](/examples/simple_task.cpp)
 ```cpp
 #include <iostream>
@@ -91,10 +91,26 @@ Main: All tasks completed. Shutting down.
 * [呼び出し規約(ABI)](https://gitlab.com/x86-psABIs/x86-64-ABI)の違反が発覚した。\
     16ビットアラインメントを違反していたことにより、セグメンテーション フォルトで落散ることが確認できた。
 
-## ビルド方法
+## ビルド方法 (How to build)
 ```Bash
 $ git clone https://github.com/iwill200902/ULT.git
 $ cd ULT
 $ cmake -S . -B build
 $ cmake --build build
 ```
+
+## 性能評価 (Performance Evaluation)
+
+### **実験概要**
+カーネルレベルスレッド（KLT）である `std::thread` と、本ライブラリ（ULT）のコンテキストスイッチおよび実行速度の性能比較を実施した。
+
+* **検証内容**: 4,000個のスレッドを生成・実行し、各スレッドが計算の途中で必ず1回明示的に `yield()` を呼び出してコンテキストスイッチを発生させた。また、ソースコードはAIで生成し、最適化はなし(-O0)に設定した。
+* **ソースコード**: [`benchmark_ult.cpp`](/tests/benchmark_ult.cpp), [`benchmark_klt.cpp`](/tests/benchmark_klt.cpp)
+
+### **計測結果**
+4,000スレッドの同時実行において、すべてのスレッドが実行を開始し、コンテキストスイッチを経て安全に全処理を終了するまでの総時間をマイクロ秒（μs）単位で計測した。
+
+| スレッドモデル | 計測時間 (Time Taken) | 速度倍率 |
+| :--- | :--- | :--- |
+| **KLT (`std::thread`)** | **26,931 us** | 基準 (1.0x) |
+| **本ライブラリ (ULT)** | **3,134 us** | **約 8.59x 高速** |
